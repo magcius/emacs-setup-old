@@ -1,0 +1,20 @@
+
+.PHONY: all download compile clean
+
+all: download compile
+
+download:
+	if [ -e "Pymacs" ]; then \
+	  cd Pymacs; \
+	    git pull; \
+	else \
+	  git clone git://github.com/pinard/Pymacs.git Pymacs; \
+	fi
+
+compile:
+	cd Pymacs; chmod -R 770 .; python setup.py install --prefix=~/.local
+	cp Pymacs/pymacs.el .
+	emacs -L . -batch -f batch-byte-compile pymacs.el
+
+clean:
+	find . -not -name "Makefile" -exec rm -rf {} \; || true
