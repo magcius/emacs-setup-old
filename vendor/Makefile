@@ -1,5 +1,5 @@
 
-TARGETS = Pymacs ropemacs magit auto-complete python-mode yasnippet
+TARGETS = Pymacs ropemacs magit python-mode yasnippet
 CLEAN_TARGETS = $(TARGETS:=.clean)
 
 .PHONY: all clean compile $(TARGETS) $(CLEAN_TARGETS)
