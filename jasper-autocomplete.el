@@ -13,10 +13,15 @@
 (define-key ac-complete-mode-map "\M-n" 'ac-next)
 (define-key ac-complete-mode-map "\M-p" 'ac-previous)
 
-(setq ac-auto-start 3)
+(setq ac-auto-start 0)
 (setq ac-dwim t)
 
-(set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer))
+(setq ac-trigger-key '(kdb "TAB"))
+
+(set-default 'ac-sources '(ac-source-yasnippet
+			   ac-source-abbrev
+			   ac-source-words-in-buffer
+			   ac-source-semantic))
 
 (ac-ropemacs-initialize)
 (ac-css-keywords-initialize)

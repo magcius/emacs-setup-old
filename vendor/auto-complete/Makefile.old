@@ -13,6 +13,8 @@ download:
 
 compile:
 	cp auto-complete/*.el .
+	sed -i.backup -e 's/;(setq ac-sources/(setq ac-sources/' \
+	              -e 's/(setq ac-omni/);(setq ac-omni/' auto-complete-config.el
 	emacs -L . -batch -f batch-byte-compile *.el
 
 clean:
