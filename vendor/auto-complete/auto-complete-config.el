@@ -300,11 +300,9 @@
 (defvar ac-source-ropemacs
   '((init
      . (lambda ()
-	 (print "trying to complete")
          (setq ac-ropemacs-completions-cache
                (mapcar
                 (lambda (completion)
-		  (print completion)
                   (concat ac-prefix completion))
                 (ignore-errors
                   (rope-completions))))))
