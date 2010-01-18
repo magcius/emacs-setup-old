@@ -13,6 +13,7 @@
 
 (setq ropemacs-guess-project t)
 (setq ropemacs-enable-autoimports t)
+(setq ropemacs-separate-doc-buffer nil)
 
 (load-library "pylookup")
 
@@ -20,12 +21,3 @@
 
 (setq pylookup-program (concat pylookup-dir "pylookup.py"))
 (setq pylookup-db-file (concat pylookup-dir "pylookup.db"))
-
-(defun ac-complete-dot ()
-  (interactive)
-  (insert ".")
-  (auto-complete))
-
-;;(add-hook 'python-mode-hook
-;;  '(lambda ()
-;;     (define-key py-mode-map "." 'ac-complete-dot)))
