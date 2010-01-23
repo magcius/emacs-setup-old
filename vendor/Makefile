@@ -1,5 +1,5 @@
 
-TARGETS = Pymacs ropemacs magit python-mode yasnippet
+TARGETS = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2
 CLEAN_TARGETS = $(TARGETS:=.clean)
 
 .PHONY: all clean compile $(TARGETS) $(CLEAN_TARGETS)

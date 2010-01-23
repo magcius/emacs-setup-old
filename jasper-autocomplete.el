@@ -9,14 +9,11 @@
 (set-face-background 'ac-selection-face "steelblue")
 
 (define-key ac-complete-mode-map "\t" 'ac-expand)
-(define-key ac-complete-mode-map "\r" 'ac-complete)
 (define-key ac-complete-mode-map "\M-n" 'ac-next)
 (define-key ac-complete-mode-map "\M-p" 'ac-previous)
 
 (setq ac-auto-start 0)
 (setq ac-dwim t)
-
-(setq ac-trigger-key '(kdb "TAB"))
 
 (set-default 'ac-sources '(ac-source-yasnippet
 			   ac-source-abbrev

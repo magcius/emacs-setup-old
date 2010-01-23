@@ -15,6 +15,7 @@
 (load-library "jasper-visual")
 (load-library "jasper-autocomplete")
 (load-library "jasper-python")
+(load-library "jasper-pkgbuild")
 (load-library "jasper-yasnippet")
 (load-library "jasper-magit")
 (load-library "jasper-misc")

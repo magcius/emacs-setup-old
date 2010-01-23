@@ -21,3 +21,5 @@
 
 (setq pylookup-program (concat pylookup-dir "pylookup.py"))
 (setq pylookup-db-file (concat pylookup-dir "pylookup.db"))
+
+;; (add-hook 'python-mode-hook 'python-turn-on-eldoc-mode)

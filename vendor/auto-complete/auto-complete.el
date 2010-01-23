@@ -90,7 +90,7 @@
 ;;
 ;; or
 ;;
-;;     ;; start completion when entered 3 characters
+;;     ;; start completion when enterd 3 characters
 ;;     (setq ac-auto-start 3)
 ;;
 ;;
@@ -358,7 +358,6 @@ If there is no common part, this will be nil.")
 (defvar ac-completing-map
   (let ((map (make-sparse-keymap)))
     (define-key map "\t" 'ac-expand)
-    (define-key map "\r" 'ac-complete)
     
     (define-key map [down] 'ac-next)
     (define-key map [up] 'ac-previous)

@@ -1,3 +1,6 @@
 *~
+#*#
+*.pyc
 *.elc
+jasper-private.el
 auto-save-list
