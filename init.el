@@ -13,6 +13,8 @@
        (normal-top-level-add-subdirs-to-load-path))
 
 (load-library "jasper-visual")
+(load-library "jasper-cc-mode")
+(load-library "jasper-js2")
 (load-library "jasper-autocomplete")
 (load-library "jasper-python")
 (load-library "jasper-pkgbuild")
