@@ -13,7 +13,7 @@ download:
 
 compile:
 	cp python-mode/*.el .
-	emacs --batch -f batch-byte-compile *.el
+	emacs -L . -L .. -L ../Pymacs -batch -f batch-byte-compile *.el
 
 clean:
 	find . -not -name "Makefile" -exec rm -rf {} \; || true
