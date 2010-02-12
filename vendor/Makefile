@@ -1,5 +1,5 @@
 
-DIR_TARGETS       = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2 auto-complete dbgr
+DIR_TARGETS       = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2 auto-complete dbgr cedet
 DIR_CLEAN_TARGETS = $(DIR_TARGETS:=.clean)
 
 EL_TARGETS        = *.el
