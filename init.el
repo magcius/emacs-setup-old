@@ -23,3 +23,4 @@
 (load-library "jasper-misc")
 (load-library "jasper-dbgr")
 (load-library "jasper-private")
+(load-library "jasper-cedet")

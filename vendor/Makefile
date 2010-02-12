@@ -1,8 +1,11 @@
 
-TARGETS = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2 auto-complete dbgr
-CLEAN_TARGETS = $(TARGETS:=.clean)
+DIR_TARGETS       = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2 auto-complete dbgr
+DIR_CLEAN_TARGETS = $(DIR_TARGETS:=.clean)
 
-.PHONY: all clean compile $(TARGETS) $(CLEAN_TARGETS)
+EL_TARGETS        = *.el
+EL_CLEAN_TARGETS  = $(EL_TARGETS:=.clean)
+
+.PHONY: all clean clean-elc compile other $(EL_TARGETS) $(DIR_TARGETS)
 
 all: gist.el color-theme.el pager.el load-relative.el loc-changes.el other compile
 
@@ -25,18 +28,22 @@ color-theme.el:
 pager.el:
 	curl -O http://user.it.uu.se/~mic/pager.el
 
-other: $(TARGETS)
+other: $(DIR_TARGETS)
 
-compile:
-	emacs -L . -batch -f batch-byte-compile *.el
+$(EL_TARGETS):
+	emacs -L . -batch -f batch-byte-compile $@
 
-$(TARGETS):
+$(EL_CLEAN_TARGETS):
+	rm $(@:.clean=)
+
+compile: $(EL_TARGETS)
+
+clean-elc: $(ELC_CLEAN_TARGETS)
+
+$(DIR_TARGETS):
 	$(MAKE) -C $@
 
-clean-elc:
-	rm *.elc
-
-$(CLEAN_TARGETS):
+$(DIR_CLEAN_TARGETS):
 	$(MAKE) -C $(@:.clean=) clean
 
-clean: clean-elc $(CLEAN_TARGETS)
+clean: clean-elc $(DIR_CLEAN_TARGETS)

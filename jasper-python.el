@@ -17,7 +17,7 @@
 
 (load-library "pylookup")
 
-(setq pylookup-dir "~/.emacs.d/vendor/pylookup")
+(setq pylookup-dir "~/.emacs.d/vendor/pylookup/")
 
 (setq pylookup-program (concat pylookup-dir "pylookup.py"))
 (setq pylookup-db-file (concat pylookup-dir "pylookup.db"))

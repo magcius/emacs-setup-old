@@ -1,16 +1,30 @@
 
-.PHONY: all other compile clean
+DIR_TARGETS       = vendor
+DIR_CLEAN_TARGETS = $(DIR_TARGETS:=.clean)
 
-all: other compile
+EL_TARGETS = *.el
+EL_CLEAN_TARGETS = $(EL_TARGETS:=.clean)
 
-other: 
-	$(MAKE) -C vendor
+.PHONY: all clean clean-elc compile other $(EL_TARGETS) $(DIR_TARGETS)
 
-compile:
-	emacs -L . -L vendor -L vendor/auto-complete -batch -f batch-byte-compile *.el
+all: other $(EL_TARGETS)
 
-clean-elc:
-	rm *.elc
+other: $(DIR_TARGETS)
 
-clean: clean-elc
-	$(MAKE) -C vendor clean
+compile: $(EL_TARGETS)
+
+$(EL_TARGETS):
+	emacs -L . -L vendor -L vendor/auto-complete -batch -f batch-byte-compile $@
+
+$(EL_CLEAN_TARGETS):
+	rm $(@:.clean=)
+
+clean-elc: $(EL_CLEAN_TARGETS)
+
+$(DIR_TARGETS):
+	$(MAKE) -C $@
+
+$(DIR_CLEAN_TARGETS):
+	$(MAKE) -C $(@:.clean=) clean
+
+clean: clean-elc $(DIR_CLEAN_TARGETS)
