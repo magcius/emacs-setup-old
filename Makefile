@@ -1,13 +1,16 @@
 
 .PHONY: all other compile clean
 
-all: compile
+all: other compile
 
 other: 
-	make -C vendor
+	$(MAKE) -C vendor
 
-compile: other
+compile:
 	emacs -L . -L vendor -L vendor/auto-complete -batch -f batch-byte-compile *.el
 
-clean:
-	make -C vendor clean
+clean-elc:
+	rm *.elc
+
+clean: clean-elc
+	$(MAKE) -C vendor clean

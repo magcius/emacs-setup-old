@@ -1,12 +1,12 @@
 
 .PHONY: all download compile clean
 
-all: compile
+all: download compile
 
 download:
 	curl -O http://js2-mode.googlecode.com/svn/trunk/js2-mode.el
 
-compile: download
+compile:
 	emacs -batch -f batch-byte-compile js2-mode.el
 
 clean:

@@ -1,13 +1,19 @@
 
-TARGETS = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2
+TARGETS = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2 auto-complete dbgr
 CLEAN_TARGETS = $(TARGETS:=.clean)
 
 .PHONY: all clean compile $(TARGETS) $(CLEAN_TARGETS)
 
-all: gist.el color-theme.el pager.el compile
+all: gist.el color-theme.el pager.el load-relative.el loc-changes.el other compile
 
 gist.el:
 	curl -O http://github.com/defunkt/gist.el/raw/master/gist.el
+
+load-relative.el:
+	curl -O http://github.com/rocky/emacs-load-relative/raw/master/load-relative.el
+
+loc-changes.el:
+	curl -O http://github.com/rocky/emacs-loc-changes/raw/master/loc-changes.el
 
 color-theme.el:
 	curl -O http://mirror.its.uidaho.edu/pub/savannah/color-theme/color-theme-6.6.0.tar.gz
@@ -19,14 +25,18 @@ color-theme.el:
 pager.el:
 	curl -O http://user.it.uu.se/~mic/pager.el
 
-compile: $(TARGETS)
+other: $(TARGETS)
+
+compile:
 	emacs -L . -batch -f batch-byte-compile *.el
 
 $(TARGETS):
 	$(MAKE) -C $@
 
-clean: $(CLEAN_TARGETS)
+clean-elc:
 	rm *.elc
 
 $(CLEAN_TARGETS):
-	make -C $(@:.clean=) clean
+	$(MAKE) -C $(@:.clean=) clean
+
+clean: clean-elc $(CLEAN_TARGETS)
