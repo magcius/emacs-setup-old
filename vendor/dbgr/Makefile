@@ -14,6 +14,7 @@ download:
 compile:
 	cp -r emacs-dbgr/dbgr/ emacs-dbgr/dbgr.el .
 	find dbgr -name "*.el" -exec emacs -L .. -L . -L dbgr -batch -f batch-byte-compile {} +
+	emacs -L .. -L . -L dbgr -batch -f batch-byte-compile dbgr.el
 
 clean:
 	rm dbgr.el dbgr.elc

@@ -21,3 +21,5 @@
 (load-library "jasper-yasnippet")
 (load-library "jasper-magit")
 (load-library "jasper-misc")
+(load-library "jasper-dbgr")
+(load-library "jasper-private")
