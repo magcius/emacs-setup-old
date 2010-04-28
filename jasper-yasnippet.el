@@ -1,5 +1,12 @@
 
-(load-library "yasnippet")
+(require 'yasnippet)
+(require 'load-relative)
+
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
-(yas/load-directory "~/.emacs.d/snippets")
+(yas/load-directory (relative-expand-file-name
+                     "vendor/yasnippet/snippets"))
+
+(yas/load-directory (relative-expand-file-name
+                     "snippets"))
+
+(provide 'jasper-yasnippet)

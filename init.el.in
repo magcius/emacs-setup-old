@@ -1,0 +1,19 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   JASPER'S EMACS SETUP
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+#include "jasper-loadpath.el"
+
+(require 'jasper-visual)
+(require 'jasper-cc-mode)
+(require 'jasper-espresso)
+(require 'jasper-autocomplete)
+(require 'jasper-python)
+(require 'jasper-yasnippet)
+(require 'jasper-misc)
+(require 'jasper-flymake)
+(require 'jasper-keyboard)
+(require 'jasper-cedet)

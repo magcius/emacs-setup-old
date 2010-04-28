@@ -1,19 +1,5 @@
 
-.PHONY: all download compile clean
+LEVEL  ?= ../..
+BZRURL := lp:python-mode
 
-all: download compile
-
-download:
-	if [ -e "python-mode" ]; then \
-	  cd python-mode; \
-	    bzr up; \
-	else \
-	  bzr branch lp:python-mode; \
-	fi
-
-compile:
-	cp python-mode/*.el .
-	emacs -L . -L .. -L ../Pymacs -batch -f batch-byte-compile *.el
-
-clean:
-	find . -not -name "Makefile" -exec rm -rf {} \; || true
+include $(LEVEL)/Makefile.rules

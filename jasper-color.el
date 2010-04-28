@@ -2,10 +2,10 @@
 ;;; Based on Ryan's color theme.
 ;;; Based on color-theme-tango by danranx.
 (defun color-theme-jasper ()
-  "A color theme based on Tango Palette."
+  "A dark color theme based on Tango Palette."
   (interactive)
   (color-theme-install
-   '(color-theme-tango
+   '(color-theme-jasper
      ((background-color . "gray7")
       (background-mode . dark)
       (border-color . "#888a85")
@@ -34,11 +34,18 @@
      (font-lock-variable-name-face ((t (:foreground "#eeeeec"))))
      (font-lock-warning-face ((t (:bold t :foreground "#f57900"))))
      (font-lock-function-name-face ((t (:foreground "#edd400" :bold t :italic t))))
+     (rst-level-1-face ((t (:background "#444444"))))
+     (rst-level-2-face ((t (:background "#444444"))))
+     (rst-level-3-face ((t (:background "#444444"))))
+     (rst-level-4-face ((t (:background "#444444"))))
+     (rst-level-5-face ((t (:background "#444444"))))
+     (rst-level-6-face ((t (:background "#444444"))))
      (comint-highlight-input ((t (:italic t :bold t))))
      (comint-highlight-prompt ((t (:foreground "#8ae234"))))
      (isearch ((t (:background "#f57900" :foreground "#2e3436"))))
      (isearch-lazy-highlight-face ((t (:foreground "#2e3436" :background "#e9b96e"))))
-     (show-paren-match-face ((t (:foreground "#2e3436" :background "#73d216"))))
+     (smerge-refined-change ((t (:background "#444444"))))
+     (show-paren-match-face ((t (:background "#222222"))))
      (show-paren-mismatch-face ((t (:background "#ad7fa8" :foreground "#2e3436"))))
      (minibuffer-prompt ((t (:foreground "#729fcf" :bold t))))
      (info-xref ((t (:foreground "#729fcf"))))
@@ -53,4 +60,4 @@
                  "magenta" "#8ae234"
                  "#8ae234")))
 
-(provide 'color-theme-tango)
+(provide 'jasper-color)

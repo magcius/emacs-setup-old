@@ -2,5 +2,11 @@
 #*#
 *.pyc
 *.elc
+*.hg*
+*.git*
+*.bzr*
+*CVS*
+*.svn*
+init.el
 jasper-private.el
 auto-save-list

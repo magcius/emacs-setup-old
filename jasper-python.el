@@ -1,25 +1,15 @@
 
-(load-library "python-mode")
+(require 'python-mode)
 
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
-(load-library "pylint")
-(load-library "pylint-flymake")
-
-(load-library "pymacs")
-
+(require 'pymacs)
 (pymacs-load "ropemacs" "rope-")
 
-(setq ropemacs-guess-project t)
-(setq ropemacs-enable-autoimports t)
-(setq ropemacs-separate-doc-buffer nil)
+(setq ropemacs-guess-project       t)
+(setq ropemacs-separate-doc-buffer t)
+(setq ropemacs-enable-autoimport   t)
 
-(load-library "pylookup")
-
-(setq pylookup-dir "~/.emacs.d/vendor/pylookup/")
-
-(setq pylookup-program (concat pylookup-dir "pylookup.py"))
-(setq pylookup-db-file (concat pylookup-dir "pylookup.db"))
-
-;; (add-hook 'python-mode-hook 'python-turn-on-eldoc-mode)
+(require 'jasper-autocomplete)
+(provide 'jasper-python)

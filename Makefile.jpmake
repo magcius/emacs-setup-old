@@ -1,0 +1,144 @@
+# -*- mode: makefile -*-
+
+
+# '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+# =============================================================================
+# JPMAKE ------------ A collection of Makefile rules used to assemble and build
+#                     sources from a bunch of places.
+
+PERL     ?= perl
+PYTHON   ?= python
+EMACS    ?= emacs
+
+TARGETS  ?=
+SUBDIRS  ?=
+
+.PHONY: all full-fetch before-fetch after-fetch
+.PHONY: fetch compile compile-elc clean clean-elc $(SUBDIRS)
+
+all : full-fetch $(TARGETS) compile compile-elc $(SUBDIRS)
+
+full-fetch : before-fetch fetch after-fetch
+fetch :
+before-fetch :
+after-fetch :
+
+ifdef TARURL
+  TAR   := $(shell basename "$(TARURL)")
+  DIR   ?= $(basename $(TAR))
+  UFLAG :=
+
+  ifeq ($(suffix $(TAR)),.gz)
+    UFLAG := z
+    DIR   := $(basename $(DIR))
+  endif
+  ifeq ($(suffix $(TAR)),.bz2)
+   UFLAG := j
+   DIR   := $(basename $(DIR))
+  endif
+
+fetch :
+	if test ! -e "$(DIR)"; then \
+	  wget "$(TARURL)"; \
+	  tar x$(UFLAG)f "$(TAR)"; \
+	  rm "$(TAR)"; \
+	fi
+endif
+
+ifdef GITURL
+  VCS := GIT
+else ifdef HGURL
+  VCS := HG
+else ifdef BZRURL
+  VCS := BZR
+endif
+GITGET  = git clone $(URL) $(DIR)
+GITPULL = git diff --exit-code; R=$$?; echo $$R; if test $$R -ne 0; then git stash save jpmake-stash; fi; git pull --rebase && if test $$R -ne 0; then git stash pop; fi
+
+HGGET   = hg clone $(URL) $(DIR)
+HGPULL  = hg pull && hg up
+
+BZRGET  = bzr get $(URL) $(DIR)
+BZRPULL = bzr pull
+
+ifdef VCS
+URL := $($(VCS)URL)
+DIR := $(shell basename $(URL) | perl -ple 's/(.*):(.*)/$$2/' | perl -ple 's/(.*)\..*/$$1/')
+fetch :
+	if test -e "$(DIR)"; then \
+	  cd "$(DIR)" && $($(VCS)PULL); \
+	else \
+	  $($(VCS)GET); \
+	fi
+endif
+
+DIR := $(abspath $(DIR))
+
+PREPROC       ?= $(PERL) -0777 -ple 's/\#include\s+"(.*)"/open(F,$$1);<F>/e' 
+MAKEARGS      ?=
+ELCOMPILEARGS ?=
+SETUPPYARGS   ?= --user
+
+ELCOMPILE  = $(EMACS) $(ELCOMPILEARGS) -batch -f batch-byte-compile
+RAKE       = rake
+SCONS      = scons
+AUTORECONF = autoreconf
+CONFIGURE  = ./configure $(CONFIGUREARGS)
+
+ifndef NOMAKE
+TRYMAKE   ?= fi; if test -e "Makefile"; then $(MAKE); else
+endif
+
+preprocessor : 
+	for n in $$(ls *.in); do \
+	  $(PREPROC) $$n > $$(basename $$n .in); \
+	done
+
+ifdef DIR 
+compile : preprocessor
+	cd "$(DIR)"; \
+	if   test -e "Rakefile"; then \
+	  $(RAKE); \
+	elif test -e "SConstruct"; then \
+	  $(SCONS); \
+	elif test -e "autogen.sh"; then \
+	  ./autogen.sh; \
+	elif test -e "configure.ac"; then \
+	  $(AUTORECONF); \
+	fi; \
+	if test -e "configure"; then \
+	  $(CONFIGURE); \
+	$(TRYMAKE) \
+	  if test -n "$$(find -name "*.el")"; then \
+	    find . -name "*.el" | xargs $(ELCOMPILE); \
+	  fi; \
+	  if test -e "setup.py"; then \
+	    python setup.py install $(SETUPPYARGS); \
+	  fi; \
+	fi
+else
+compile : preprocessor
+	$(ELCOMPILE) *.el
+endif
+
+clean-SUBDIRS := $(SUBDIRS:=.clean)
+
+clean : $(clean-SUBDIRS)
+	find $(DIR) -name "*.elc" -or -name "*.pyc"  -or \
+	            -name "*.~"   -or -name "#"*"#"  -or \
+	            -name "*.o"   -or -name "*.a"    -or \
+	            -name "*.so"  -or -name "*.tar*" -exec rm -f {} +
+
+$(clean-SUBDIRS) :
+	$(MAKE) -C $@ clean
+
+$(SUBDIRS) :
+	$(MAKE) -C $@
+
+ifneq ($(wildcard $(LEVEL)/Makefile.config),)
+  include $(LEVEL)/Makefile.config
+endif
+
+ifneq ($(wildcard Makefile.config),)
+  include Makefile.config
+endif

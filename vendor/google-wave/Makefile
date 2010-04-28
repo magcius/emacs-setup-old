@@ -1,20 +1,6 @@
 
-.PHONY: all download compile clean
+LEVEL  ?= ../..
+HGURL  := https://wave-client-for-emacs.googlecode.com/hg/
+DIR    := google-wave-client
 
-all: download compile
-
-download:
-	if [ -e "google-wave-client" ]; then \
-	  cd google-wave-client; \
-	    hg pull; \
-	    hg update; \
-	else \
-	  hg clone https://wave-client-for-emacs.googlecode.com/hg/ google-wave-client; \
-	fi
-	cp google-wave-client/lisp/*.el .
-
-compile:
-	emacs -Q -L . -batch -f batch-byte-compile *.el
-
-clean:
-	find . -not -name "Makefile" -exec rm -rf {} \; || true
+include $(LEVEL)/Makefile.rules

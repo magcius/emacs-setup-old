@@ -1,13 +1,12 @@
 
-DIR_TARGETS       = Pymacs ropemacs magit python-mode yasnippet google-wave pkgbuild-mode js2 auto-complete dbgr cedet pylookup
-DIR_CLEAN_TARGETS = $(DIR_TARGETS:=.clean)
+LEVEL   ?= ..
+SUBDIRS := Pymacs ropemode ropemacs magit python-mode yasnippet google-wave auto-complete dbgr cedet pylookup color-theme
+TARGETS := espresso.el gist.el load-relative.el loc-changes.el pager.el pkgbuild-mode.el
 
-EL_TARGETS        = *.el
-EL_CLEAN_TARGETS  = $(EL_TARGETS:=.clean)
+include $(LEVEL)/Makefile.rules
 
-.PHONY: all clean clean-elc compile other $(EL_TARGETS) $(DIR_TARGETS)
-
-all: gist.el color-theme.el pager.el load-relative.el loc-changes.el other compile
+espresso.el:
+	curl -O http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el
 
 gist.el:
 	curl -O http://github.com/defunkt/gist.el/raw/master/gist.el
@@ -18,32 +17,8 @@ load-relative.el:
 loc-changes.el:
 	curl -O http://github.com/rocky/emacs-loc-changes/raw/master/loc-changes.el
 
-color-theme.el:
-	curl -O http://mirror.its.uidaho.edu/pub/savannah/color-theme/color-theme-6.6.0.tar.gz
-	tar xzf color-theme-6.6.0.tar.gz
-	rm color-theme-6.6.0.tar.gz
-	cp -r color-theme-6.6.0/color-theme.el color-theme-6.6.0/themes .
-	rm -r color-theme-6.6.0
-
 pager.el:
 	curl -O http://user.it.uu.se/~mic/pager.el
 
-other: $(DIR_TARGETS)
-
-$(EL_TARGETS):
-	emacs -L . -batch -f batch-byte-compile $@
-
-$(EL_CLEAN_TARGETS):
-	rm $(@:.clean=)
-
-compile: $(EL_TARGETS)
-
-clean-elc: $(ELC_CLEAN_TARGETS)
-
-$(DIR_TARGETS):
-	$(MAKE) -C $@
-
-$(DIR_CLEAN_TARGETS):
-	$(MAKE) -C $(@:.clean=) clean
-
-clean: clean-elc $(DIR_CLEAN_TARGETS)
+pkgbuild-mode.el:
+	curl -O http://dev.archlinux.org/~eric/pkgbuild-mode.el

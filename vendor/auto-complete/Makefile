@@ -1,10 +1,5 @@
 
-.PHONY: all clean
+LEVEL  := ../..
+GITURL := git://github.com/magcius/auto-complete.git
 
-all: compile
-
-compile:
-	emacs -L . -batch -f batch-byte-compile *.el
-
-clean:
-	rm -r *.elc
+include $(LEVEL)/Makefile.rules

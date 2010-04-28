@@ -1,10 +1,3 @@
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;;   JASPER'S EMACS SETUP
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (require 'grep)
 
 (setq jasper-root-path
@@ -21,15 +14,3 @@
 		    grep-find-ignored-directories " -o "))))))
 
 (provide 'jasper-loadpath)
-
-
-(require 'jasper-visual)
-(require 'jasper-cc-mode)
-(require 'jasper-espresso)
-(require 'jasper-autocomplete)
-(require 'jasper-python)
-(require 'jasper-yasnippet)
-(require 'jasper-misc)
-(require 'jasper-flymake)
-(require 'jasper-keyboard)
-(require 'jasper-cedet)

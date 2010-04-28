@@ -1,8 +1,13 @@
 
-(load-library "gist")
-(load-library "wave-client")
-(load-library "wave-list")
-(load-library "wave-display")
-(load-library "cedet")
+(require 'pkgbuild-mode)
+(require 'load-relative)
+(require 'loc-changes)
+(require 'pager)
+(require 'dbgr)
+(require 'gist)
+
+(require 'magit)
+
+(provide 'jasper-misc)
 
 (server-start)
