@@ -11,5 +11,6 @@
 (setq ropemacs-separate-doc-buffer t)
 (setq ropemacs-enable-autoimport   t)
 
-(require 'jasper-autocomplete)
+(ac-ropemacs-setup)
+
 (provide 'jasper-python)

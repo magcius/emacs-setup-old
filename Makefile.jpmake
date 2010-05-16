@@ -53,7 +53,9 @@ else ifdef BZRURL
   VCS := BZR
 endif
 GITGET  = git clone $(URL) $(DIR)
-GITPULL = git diff --exit-code; R=$$?; echo $$R; if test $$R -ne 0; then git stash save jpmake-stash; fi; git pull --rebase && if test $$R -ne 0; then git stash pop; fi
+GITPULL = git diff --exit-code; R=$$?; echo $$R; if test $$R -ne 0; \
+   then git stash save jpmake-stash; fi; git pull --rebase origin master \
+   && if test $$R -ne 0; then git stash pop; fi
 
 HGGET   = hg clone $(URL) $(DIR)
 HGPULL  = hg pull && hg up

@@ -19,6 +19,6 @@
          (file-exists-p lintnode-node-program))
     (lintnode-start))
 
-(setq flymake-allowed-file-name-masks '("\\.js\\'" flymake-jslint-init))
+(add-hook 'espresso-mode-hook 'flymake-mode)
 
 (provide 'jasper-espresso)
