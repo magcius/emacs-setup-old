@@ -9,7 +9,7 @@
 
 (setq ropemacs-guess-project       t)
 (setq ropemacs-separate-doc-buffer t)
-(setq ropemacs-enable-autoimport   t)
+(setq ropemacs-enable-autoimport   nil)
 
 (ac-ropemacs-setup)
 

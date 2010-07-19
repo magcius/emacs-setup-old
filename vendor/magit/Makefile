@@ -1,6 +1,6 @@
 
 LEVEL  ?= ../..
-GITURL := git://gitorious.org/magit/mainline.git
+GITURL := git://github.com/philjackson/magit.git
 NOMAKE := defined
 
 include $(LEVEL)/Makefile.rules

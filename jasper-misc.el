@@ -1,5 +1,10 @@
 
 (require 'pkgbuild-mode)
+
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode))
+                              auto-mode-alist))
+
 (require 'load-relative)
 (require 'loc-changes)
 (require 'pager)
@@ -8,6 +13,6 @@
 
 (require 'magit)
 
-(provide 'jasper-misc)
-
 (server-start)
+
+(provide 'jasper-misc)

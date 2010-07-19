@@ -1,6 +1,6 @@
 
 LEVEL   ?= ..
-SUBDIRS := Pymacs ropemode ropemacs magit python-mode yasnippet google-wave auto-complete dbgr cedet pylookup color-theme
+SUBDIRS := Pymacs ropemode ropemacs magit python-mode yasnippet google-wave auto-complete dbgr pylookup color-theme
 TARGETS := espresso.el gist.el load-relative.el loc-changes.el pager.el pkgbuild-mode.el
 
 include $(LEVEL)/Makefile.rules
