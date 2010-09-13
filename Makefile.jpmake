@@ -120,7 +120,7 @@ compile : preprocessor
 	fi
 else
 compile : preprocessor
-	$(ELCOMPILE) *.el
+	$(ELCOMPILE) *.el || true
 endif
 
 clean-SUBDIRS := $(SUBDIRS:=.clean)
